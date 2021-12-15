@@ -6,23 +6,23 @@
 //
 
 import Foundation
+import RealmSwift
 
 protocol MainPresenterProtocol {
-    var teams: [Team] { get set }
-    func openGroup(_ new: Bool)
+    var teams: Results<Team> { get set }
+    func openGroup(team: Team, new: Bool)
     func getAvatars(_ numberTeam: Int) -> [Data]
 }
 
 class MainPresenter: MainPresenterProtocol {
+    var teams: Results<Team>
     
-    var teams: [Team]
-    
-    init(teams: [Team]){
+    init(teams: Results<Team>){
         self.teams = teams
     }
     
-    func openGroup(_ new: Bool) {
-        Router.shared.makeGroupView(new)
+    func openGroup(team: Team = Repository.shared.newTeam, new: Bool = true) {
+        Router.shared.makeGroupView(team: team, new: new)
     }
     
     func getAvatars(_ numberTeam: Int) -> [Data] {
@@ -32,4 +32,14 @@ class MainPresenter: MainPresenterProtocol {
         }
         return avatars
     }
+    
+    func getNewTeams() {
+        teams = Repository.shared.teams
+    }
 }
+
+//NetworkService().getRandomUser() { data in
+//    let status = try? JSONDecoder().decode(RandomUser.self, from: data)
+//    print(status)
+//}
+//vc?.tableView.reloadData()

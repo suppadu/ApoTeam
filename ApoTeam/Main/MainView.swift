@@ -10,9 +10,9 @@ import UIKit
 class MainView: UITableViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
-    let presenter: MainPresenterProtocol
+    var presenter: MainPresenter
     
-    init(presenter: MainPresenterProtocol){
+    init(presenter: MainPresenter){
         self.presenter = presenter
         super.init(style: .plain)
     }
@@ -21,7 +21,13 @@ class MainView: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        presenter.getNewTeams()
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
+        print("view load")
         super.viewDidLoad()
         self.title = self.navigationController?.title
         
@@ -50,9 +56,13 @@ class MainView: UITableViewController {
         return 170
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.openGroup(team: presenter.teams[indexPath.row], new: false)
+    }
+    
     @objc
     func openNewTeam() {
-        presenter.openGroup(true)
+        presenter.openGroup()
     }
 }
 

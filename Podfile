@@ -7,4 +7,5 @@ target 'ApoTeam' do
 
   # Pods for ApoTeam
 pod 'SnapKit'
+pod 'RealmSwift'
 end

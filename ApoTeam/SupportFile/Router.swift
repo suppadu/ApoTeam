@@ -18,12 +18,15 @@ class Router {
     }
     
     private func makeMainView() {
-        navCon.viewControllers = [SceneFactory.shared.makeMainView()]
+        navCon.viewControllers = [ViewFactory.shared.makeMainView()]
         navCon.title = "Teams"
     }
     
-    func makeGroupView(_ new: Bool) {
-        navCon.pushViewController(SceneFactory.shared.makeGroupView(), animated: true)
-//        navCon.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+    func makeGroupView(team: Team, new: Bool) {
+        navCon.pushViewController(ViewFactory.shared.makeGroupView(team: team, new: new), animated: true)
+    }
+    
+    func makeRedactView(member: Member, new: Bool, delegate: GroupViewDelegate) {
+        navCon.present(ViewFactory.shared.makeRedactView(member: member, new: new, delegate: delegate), animated: true){}
     }
 }

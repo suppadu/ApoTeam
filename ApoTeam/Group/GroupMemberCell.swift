@@ -8,12 +8,11 @@
 import UIKit
 import SnapKit
 
-class MemberCell: UITableViewCell {
+class GroupMemberCell: UITableViewCell {
     
     let avatar = UIImageView()
     let name = UILabel()
     let status = UILabel()
-//    var invent: [String] = []
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -62,12 +61,10 @@ class MemberCell: UITableViewCell {
         for emoji in invent {
             let image = emoji.image()
             let imgView = UIImageView()
-            print(wh)
             
             contentView.addSubview(imgView)
             imgView.image = image
             imgView.backgroundColor = .lightGray
-            imgView.layer.cornerRadius = 5
             
             imgView.layer.shadowColor = UIColor.gray.cgColor
             imgView.layer.shadowRadius = 3

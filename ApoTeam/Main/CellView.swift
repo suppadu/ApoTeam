@@ -40,7 +40,7 @@ class CellView: UITableViewCell {
         for avatar in images {
             let imgView = UIImageView()
             imgView.image = UIImage(data: avatar)
-            imgView.backgroundColor = .lightGray
+            imgView.backgroundColor = .lightGray.withAlphaComponent(0.5)
             imgView.layer.cornerRadius = 25
             imgView.clipsToBounds = true
             if avatar == images[0] {

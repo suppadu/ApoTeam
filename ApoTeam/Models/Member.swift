@@ -1,22 +1,21 @@
 //
-//  Member.swift
+//  MemberRealm.swift
 //  ApoTeam
 //
-//  Created by Дмитрий Константинов on 06.12.2021.
+//  Created by Дмитрий Константинов on 14.12.2021.
 //
 
 import Foundation
+import RealmSwift
 
-class Member {
-    var name: String
-    var status: String
-    var invent: [String]
-    var avatar: Data
+class Member: Object {
+    @objc dynamic var id = UUID().uuidString
+    @objc dynamic var name: String = "New member"
+    @objc dynamic var status: String = "Status"
+    dynamic var invent: List<String> = List<String>()
+    @objc dynamic var avatar: Data = Data()
     
-    init(name: String, status: String, invent: [String], avatar: Data){
-        self.name = name
-        self.status = status
-        self.invent = invent
-        self.avatar = avatar
+    override static func primaryKey() -> String? {
+        return "id"
     }
 }
